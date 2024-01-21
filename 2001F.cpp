@@ -9,8 +9,11 @@ ll fact(int n){
 }
 
 int main(){
-	int n;
-	cin >> n;
-	cout << fact(n) << endl;
+	int n, x;
+	cin >> x;
+	for(int i = 0; i < x; ++i){
+		cin >> n;
+		cout << fact(n) << endl;
+	}
 	return 0;
 }

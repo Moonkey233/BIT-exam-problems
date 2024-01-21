@@ -9,11 +9,12 @@ double y(double x) {
 }
 
 int main() {
-	double x;
-	do {
-		cout << "input X([0-6)): ";
+	double x, n;
+	cin >> n;
+	for(int i = 0; i < n; ++i){
 		cin >> x;
-	} while(x < 0 || x >= 6);
-	cout << y(x) << endl;
+		printf("y=%.1f\n", y(x));
+	}
+	
 	return 0;
 }

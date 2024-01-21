@@ -27,7 +27,13 @@ double Angle::calculateSin(){
 }
 
 int main(){
-	Angle a(90), b(30);
-	cout << (a-b).calculateSin() << endl;
+	int x, aa, ab;
+	cin >> x;
+	for(int i = 0; i < x; ++i){
+		cin >> aa >> ab;
+		Angle a(aa), b(ab);
+		printf("%.2f\n", (a-b).calculateSin());
+//		cout << (a-b).calculateSin() << endl;
+	}
 	return 0;
 }

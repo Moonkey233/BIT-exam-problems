@@ -6,7 +6,7 @@ class P {
 	public:
 		P(int n);
 		~P();
-		double calculate(const double &x);
+		int calculate(const double &x);
 	private:
 		int maxN;
 		double *p;
@@ -15,9 +15,9 @@ class P {
 };
 
 P::P(int n){
-	maxN = n;
-	p = new double[n];
-	for(int i = 0; i < n; ++i){
+	maxN = n + 1;
+	p = new double[n+1];
+	for(int i = 0; i < n+1; ++i){
 		cin >> p[i];
 	}
 } 
@@ -26,7 +26,7 @@ P::~P(){
 	delete[] p;
 }
 
-double P::calculate(const double &x){
+int P::calculate(const double &x){
 	double ans = 0;
 	for(int i = 0; i < maxN; ++i)
 		ans += p[i] * pow (x, i);
@@ -39,10 +39,16 @@ double P::pow(const double &x, const unsigned int &y){
 }
 
 int main(){
-	int n;
-	cin >> n;
-	P p(n);
-	int x;
-	cin >> x;
-	cout << p.calculate(x) << endl; 
+	int cnt;
+	cin >> cnt;
+	for(int i = 0; i < cnt; ++i){
+		int n;
+		cin >> n;
+		P p(n);
+		int x;
+		cin >> x;
+		printf("%d\n", p.calculate(x));
+//		cout << p.calculate(x) << endl;
+	}
+	return 0;
 }

@@ -4,8 +4,11 @@
 
 using namespace std;
 
+static int monthDay[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
 class Date {
 	public:
+		Date();
 		Date(const string &date);
 		void setDate(const string &date);
 		string getDate();
@@ -33,6 +36,12 @@ class Date {
 		int day;
 };
 
+Date::Date() {
+	int d;
+	cin >> year >> month >> day >> d;
+	day += d;
+	adjust();
+}
 Date::Date(const string &date) {
 	setDate(date);
 }
@@ -69,7 +78,7 @@ string Date::getDate() {
 }
 void Date::print() {
 	adjust();
-	cout << getDate() << endl;
+	cout << getDate();
 }
 Date Date::operator++ () {
 	day++;
@@ -100,14 +109,18 @@ Date Date::operator- (const Date &date) {
 	adjust();
 }
 void Date::adjust() {
+	int d;
 	do {
 		if(day <= 0) {
 			month -= 1;
-			day += 30;
+			day += monthDay[month];
 		}
-		if(day > 30) {
+		d = (month == 2 && (year%400==0 || (year%4==0&&year%100!=0))) ? 1 : 0;
+		if(day > monthDay[month] + d) {
+//			cout << month << " " << day << " " << monthDay[month] << endl;
+			day -= monthDay[month];
+			if(month == 2 && (year%400==0 || (year%4==0&&year%100!=0))) --day;
 			month += 1;
-			day -= 30;
 		}
 		if(month <= 0) {
 			year -= 1;
@@ -117,21 +130,30 @@ void Date::adjust() {
 			year += 1;
 			month -= 12;
 		}
-	} while(day <= 0 || day > 30 || month <= 0 || month > 12);
+		d = (month == 2 && (year%400==0 || (year%4==0&&year%100!=0))) ? 1 : 0;
+	} while(day <= 0 || day > (monthDay[month] + d) || month <= 0 || month > 12);
 }
 
 int main() {
-	Date a("2004-03-20");
-	++a;
-	a.print();
-	a.setDate("2004-03-30");
-	++a;
-	a.print();
-	a.setDate("2004-12-30");
-	++a;
-	a.print();
-	a.setDate("0-1-1");
-	--a;
-	a.print();
+//	Date a("1999-10-20");
+//	++a;
+//	a.print();
+//	a.setDate("2004-03-30");
+//	++a;
+//	a.print();
+//	a.setDate("2004-12-30");
+//	++a;
+//	a.print();
+//	a.setDate("0-1-1");
+//	--a;
+//	a.print();
+	int x;
+	cin >> x;
+	for(int i = 0; i < x; ++i) {
+		Date a;
+//		++a;
+		a.print();
+		cout << endl;
+	}
 	return 0;
 }

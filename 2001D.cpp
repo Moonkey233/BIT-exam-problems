@@ -24,27 +24,33 @@ NODE* init(int n) {
 }
 
 int main() {
-	int n, mod = 1;
-	cin >> n;
-	if(n <= 0) return -1;
-	NODE *p = init(n), *q = p;
-	int cnt = n;
-	while(cnt) {
-		if(q->flag == 1) {
-			if(mod % 3 == 0) {
-				q->flag = -1;
-				--cnt;
-				cout << q->number << " ";
+	int x;
+	cin >> x;
+	for(int i = 0; i < x; ++i){
+		int n, mod = 1;
+		cin >> n;
+		if(n <= 0) return -1;
+		NODE *p = init(n), *q = p;
+		int cnt = n;
+		while(cnt) {
+			if(q->flag == 1) {
+				if(mod % 3 == 0) {
+					q->flag = -1;
+					--cnt;
+					cout << q->number << " ";
+				}
+				++mod;
 			}
-			++mod;
+			q = q->next;
 		}
-		q = q->next;
+		q = p;
+		NODE *t = p->next;
+		for(int i = 0; i < n; ++i) {
+			delete q;
+			q = t;
+			if(i < n - 1) t = t->next;
+		}
+		cout << endl;
 	}
-	q = p;
-	NODE *t = p->next;
-	for(int i = 0; i < n; ++i) {
-		delete q;
-		q = t;
-		if(i < n - 1) t = t->next;
-	}
+	return 0;
 }
