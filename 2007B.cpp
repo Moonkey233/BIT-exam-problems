@@ -31,7 +31,7 @@ CPoint CPoint::operator - (const CPoint &c) const{
 }
 
 double CPoint::distance(const CPoint &c) const{
-	CPoint p = &this - c;
+	CPoint p = CPoint(this->x, this->y) - c;
 	return sqrt(p.getX() * p.getX() + p.getY() * p.getY());
 }
 
@@ -41,7 +41,7 @@ int main(){
 	for(int i = 0; i < x; ++i){
 		cin >> a >> b >> c >> d;
 		CPoint p1(a, b);
-		cout << p1.distance(CPoint(c, d)) << endl;
+		printf("%.2f\n", p1.distance(CPoint(c, d)));
 	}
 	return 0;
 }
